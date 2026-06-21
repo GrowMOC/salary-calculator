@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function () {
+
 const payScales = {
 1:{min22:13550,inc22:430,min26:16280,inc26:520,max26:31880},
 2:{min22:13820,inc22:490,min26:16600,inc26:590,max26:34300},
@@ -23,78 +25,79 @@ const payScales = {
 22:{min22:122190,inc22:8710,min26:146770,inc26:10470,max26:293350}
 };
 
+// ---------- LOAD BPS DROPDOWN ----------
 const dropdown = document.getElementById("bps");
 
-for(let i=1;i<=22;i++){
-let option=document.createElement("option");
-option.value=i;
-option.text="BPS-"+String(i).padStart(2,"0");
-dropdown.add(option);
+if (dropdown) {
+    dropdown.innerHTML = `<option value="">Select BPS</option>`;
+
+    for (let i = 1; i <= 22; i++) {
+        let option = document.createElement("option");
+        option.value = i;
+        option.textContent = "BPS-" + String(i).padStart(2, "0");
+        dropdown.appendChild(option);
+    }
+} else {
+    console.error("❌ BPS dropdown not found. Check id='bps' in HTML");
 }
 
-function calculateSalary(){
+// ---------- CALCULATION FUNCTION ----------
+window.calculateSalary = function () {
 
-```
-let bps=document.getElementById("bps").value;
+    const bps = document.getElementById("bps").value;
+    const current = parseInt(document.getElementById("basicPay").value);
 
-let current=parseInt(
-    document.getElementById("basicPay").value
-);
+    if (!bps) {
+        alert("Please select BPS");
+        return;
+    }
 
-if(!current){
-    alert("Please enter Basic Pay");
-    return;
-}
+    if (!current || current <= 0) {
+        alert("Please enter valid Basic Pay");
+        return;
+    }
 
-let scale=payScales[bps];
+    const scale = payScales[bps];
 
-let stage=Math.round(
-    (current-scale.min22)/scale.inc22
-);
+    if (!scale) {
+        alert("Invalid BPS selected");
+        return;
+    }
 
-let newPay=
-    scale.min26+
-    (stage*scale.inc26);
+    let stage = Math.round((current - scale.min22) / scale.inc22);
 
-let difference=
-    newPay-current;
+    if (stage < 0) stage = 0;
 
-document.getElementById("result").innerHTML = `
-<div class="result-box">
+    const newPay = scale.min26 + (stage * scale.inc26);
+    const difference = newPay - current;
 
-<h3>Salary Calculation Result</h3>
+    document.getElementById("result").innerHTML = `
+        <div class="result-box">
+            <h3>Salary Calculation Result</h3>
+            <table>
+                <tr>
+                    <td>Current Basic Pay</td>
+                    <td>Rs. ${current.toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td>New Basic Pay (2026)</td>
+                    <td>Rs. ${newPay.toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td>Difference</td>
+                    <td>Rs. ${difference.toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td>Annual Increment</td>
+                    <td>Rs. ${scale.inc26.toLocaleString()}</td>
+                </tr>
+                <tr>
+                    <td>Maximum Pay Scale</td>
+                    <td>Rs. ${scale.max26.toLocaleString()}</td>
+                </tr>
+            </table>
+        </div>
+    `;
+};
 
-<table>
-
-<tr>
-<td>Current Basic Pay</td>
-<td>Rs. ${current.toLocaleString()}</td>
-</tr>
-
-<tr>
-<td>New Basic Pay (2026)</td>
-<td>Rs. ${newPay.toLocaleString()}</td>
-</tr>
-
-<tr>
-<td>Difference</td>
-<td>Rs. ${difference.toLocaleString()}</td>
-</tr>
-
-<tr>
-<td>Annual Increment</td>
-<td>Rs. ${scale.inc26.toLocaleString()}</td>
-</tr>
-
-<tr>
-<td>Maximum Pay Scale</td>
-<td>Rs. ${scale.max26.toLocaleString()}</td>
-</tr>
-
-</table>
-
-</div>
-`;
-```
-
-}
+});
