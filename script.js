@@ -25,82 +25,73 @@ const payScales = {
 22:{min22:122190,inc22:8710,min26:146770,inc26:10470,max26:293350}
 };
 
-// ---------- LOAD BPS DROPDOWN ----------
+// ---------------- BPS DROPDOWN FIX ----------------
 const dropdown = document.getElementById("bps");
 
 if (dropdown) {
     dropdown.innerHTML = `<option value="">Select BPS</option>`;
-
     for (let i = 1; i <= 22; i++) {
-        let option = document.createElement("option");
-        option.value = i;
-        option.textContent = "BPS-" + String(i).padStart(2, "0");
-        dropdown.appendChild(option);
+        let opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = "BPS-" + String(i).padStart(2, "0");
+        dropdown.appendChild(opt);
     }
-} else {
-    console.error("❌ BPS dropdown not found. Check id='bps' in HTML");
 }
 
-// ---------- CALCULATION FUNCTION ----------
-window.calculateSalary = function () {
+// ---------------- ANIMATION FUNCTION ----------------
+function animate(id, start, end, duration) {
+    let el = document.getElementById(id);
+    let startTime = null;
 
-const resultBox = document.getElementById("result");
-
-resultBox.innerHTML = `
-    <div class="result-box">
-        <h3>Salary Calculation Result</h3>
-
-        <table>
-            <tr>
-                <td>Current Basic Pay</td>
-                <td><span id="curPay">0</span></td>
-            </tr>
-            <tr>
-                <td>New Basic Pay (2026)</td>
-                <td><span id="newPay">0</span></td>
-            </tr>
-            <tr>
-                <td>Difference</td>
-                <td><span id="diffPay">0</span></td>
-            </tr>
-            <tr>
-                <td>Annual Increment</td>
-                <td><span id="incPay">0</span></td>
-            </tr>
-            <tr>
-                <td>Maximum Pay Scale</td>
-                <td><span id="maxPay">0</span></td>
-            </tr>
-        </table>
-    </div>
-`;
-
-// ---------- ANIMATION FUNCTION ----------
-function animateValue(id, start, end, duration) {
-    let obj = document.getElementById(id);
-    let startTimestamp = null;
-
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-
-        let progress = Math.min((timestamp - startTimestamp) / duration, 1);
-
+    function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        let progress = Math.min((timestamp - startTime) / duration, 1);
         let value = Math.floor(progress * (end - start) + start);
 
-        obj.innerText = "Rs. " + value.toLocaleString();
+        el.innerText = "Rs. " + value.toLocaleString();
 
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
+        if (progress < 1) requestAnimationFrame(step);
+    }
 
-    window.requestAnimationFrame(step);
+    requestAnimationFrame(step);
 }
 
-// ---------- RUN ANIMATIONS ----------
-animateValue("curPay", 0, current, 700);
-animateValue("newPay", 0, newPay, 900);
-animateValue("diffPay", 0, difference, 800);
-animateValue("incPay", 0, scale.inc26, 700);
-animateValue("maxPay", 0, scale.max26, 900);
-    
+// ---------------- MAIN CALC ----------------
+window.calculateSalary = function () {
+
+    let bps = document.getElementById("bps").value;
+    let current = parseInt(document.getElementById("basicPay").value);
+
+    if (!bps) return alert("Select BPS");
+    if (!current) return alert("Enter Basic Pay");
+
+    let scale = payScales[bps];
+    if (!scale) return alert("Invalid BPS");
+
+    let stage = Math.round((current - scale.min22) / scale.inc22);
+    if (stage < 0) stage = 0;
+
+    let newPay = scale.min26 + (stage * scale.inc26);
+    let difference = newPay - current;
+
+    document.getElementById("result").innerHTML = `
+        <div class="result-box">
+            <h3>Salary Calculation Result</h3>
+            <table>
+                <tr><td>Current Basic Pay</td><td id="cur"></td></tr>
+                <tr><td>New Basic Pay</td><td id="new"></td></tr>
+                <tr><td>Difference</td><td id="diff"></td></tr>
+                <tr><td>Annual Increment</td><td id="inc"></td></tr>
+                <tr><td>Max Pay Scale</td><td id="max"></td></tr>
+            </table>
+        </div>
+    `;
+
+    animate("cur", 0, current, 600);
+    animate("new", 0, newPay, 900);
+    animate("diff", 0, difference, 800);
+    animate("inc", 0, scale.inc26, 700);
+    animate("max", 0, scale.max26, 900);
+};
+
+});
