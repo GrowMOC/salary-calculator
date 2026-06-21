@@ -116,3 +116,26 @@ td:last-child {
     font-weight: 600;
     color: #38bdf8;
 }
+.result-box {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 15px;
+    animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+td span {
+    font-weight: 700;
+    color: #38bdf8;
+}
