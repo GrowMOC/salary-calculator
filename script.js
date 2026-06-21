@@ -25,7 +25,7 @@ const payScales = {
 22:{min22:122190,inc22:8710,min26:146770,inc26:10470,max26:293350}
 };
 
-// ---------------- BPS DROPDOWN FIX ----------------
+/* DROPDOWN */
 const dropdown = document.getElementById("bps");
 
 if (dropdown) {
@@ -38,35 +38,33 @@ if (dropdown) {
     }
 }
 
-// ---------------- ANIMATION FUNCTION ----------------
+/* ANIMATION */
 function animate(id, start, end, duration) {
-    let el = document.getElementById(id);
+    const el = document.getElementById(id);
     let startTime = null;
 
     function step(timestamp) {
         if (!startTime) startTime = timestamp;
         let progress = Math.min((timestamp - startTime) / duration, 1);
         let value = Math.floor(progress * (end - start) + start);
-
         el.innerText = "Rs. " + value.toLocaleString();
-
         if (progress < 1) requestAnimationFrame(step);
     }
 
     requestAnimationFrame(step);
 }
 
-// ---------------- MAIN CALC ----------------
+/* MAIN FUNCTION */
 window.calculateSalary = function () {
 
     let bps = document.getElementById("bps").value;
     let current = parseInt(document.getElementById("basicPay").value);
 
-    if (!bps) return alert("Select BPS");
-    if (!current) return alert("Enter Basic Pay");
+    if (!bps) return alert("Please select BPS");
+    if (!current) return alert("Please enter Basic Pay");
 
     let scale = payScales[bps];
-    if (!scale) return alert("Invalid BPS");
+    if (!scale) return alert("Invalid BPS selected");
 
     let stage = Math.round((current - scale.min22) / scale.inc22);
     if (stage < 0) stage = 0;
@@ -79,10 +77,10 @@ window.calculateSalary = function () {
             <h3>Salary Calculation Result</h3>
             <table>
                 <tr><td>Current Basic Pay</td><td id="cur"></td></tr>
-                <tr><td>New Basic Pay</td><td id="new"></td></tr>
+                <tr><td>New Basic Pay (2026)</td><td id="new"></td></tr>
                 <tr><td>Difference</td><td id="diff"></td></tr>
                 <tr><td>Annual Increment</td><td id="inc"></td></tr>
-                <tr><td>Max Pay Scale</td><td id="max"></td></tr>
+                <tr><td>Maximum Pay Scale</td><td id="max"></td></tr>
             </table>
         </div>
     `;
