@@ -88,8 +88,8 @@
             max-width: 600px;
         }
 
-        /* TEO Presentation Banner */
-        .teo-banner {
+        /* DEO Presentation Banner */
+        .DEO-banner {
             background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 16px;
@@ -103,7 +103,7 @@
             width: 100%;
         }
 
-        .teo-photo {
+        .DEO-photo {
             width: 55px;
             height: 55px;
             border-radius: 50%;
@@ -113,11 +113,11 @@
             flex-shrink: 0;
         }
 
-        .teo-info {
+        .DEO-info {
             text-align: left;
         }
 
-        .teo-label {
+        .DEO-label {
             font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -125,13 +125,13 @@
             font-weight: 600;
         }
 
-        .teo-name {
+        .DEO-name {
             font-size: 1.05rem;
             font-weight: 700;
             line-height: 1.2;
         }
 
-        .teo-designation {
+        .DEO-designation {
             font-size: 0.82rem;
             opacity: 0.8;
             font-weight: 500;
@@ -430,7 +430,7 @@
                 background: white;
                 color: black;
             }
-            .calculator-header, .soes-footer, .btn-action, .teo-banner {
+            .calculator-header, .soes-footer, .btn-action, .DEO-banner {
                 display: none !important;
             }
             .main-container {
@@ -752,8 +752,8 @@
             .footer-text { flex-direction: column; gap: 5px; text-align: center; }
             .separator { display: none; }
             .footer-content { gap: 10px; }
-            .teo-banner { flex-direction: column; text-align: center; }
-            .teo-info { text-align: center; }
+            .DEO-banner { flex-direction: column; text-align: center; }
+            .DEO-info { text-align: center; }
             .header-content h1 { font-size: 1.7rem; }
         }
     </style>
@@ -767,13 +767,13 @@
             <h1>Salary Calculator</h1>
             <p>Calculate your updated basic pay and the new 7% Adhoc Relief Allowance 2026 on Basic Pay Scales (BPS 2026).</p>
             
-            <!-- TEO Presentation Banner -->
-            <div class="teo-banner">
-                <img src="teo-photo.jpg" alt="TEO Mr. Niaz Ahmed Khoso" class="teo-photo" onerror="this.src='https://ui-avatars.com/api/?name=Niaz+Ahmed+Khoso&background=047857&color=fff&size=128&bold=true'">
-                <div class="teo-info">
-                    <div class="teo-label">Presented to you by</div>
-                    <div class="teo-name">TEO Mr. Niaz Ahmed Khoso</div>
-                    <div class="teo-designation">Taluka Thul</div>
+            <!-- DEO Presentation Banner -->
+            <div class="DEO-banner">
+                <img src="DEO-photo.jpg" alt="DEO Mr. Muhammad Ismail Buriro" class="DEO-photo" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Ismail+Buriro&background=047857&color=fff&size=256&bold=true'">
+                <div class="DEO-info">
+                    <div class="DEO-label">Presented to you by</div>
+                    <div class="DEO-name">DEO Mr. Muhammad Ismail Buriro</div>
+                    <div class="DEO-designation">District Jacobabad</div>
                 </div>
             </div>
         </div>
@@ -1398,10 +1398,10 @@
                         if (bps >= 20 && s === 15) {
                             html += `<td rowspan="6" colspan="16" class="dev-badge-cell">
                                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; text-align: left; padding: 10px;">
-                                    <img src="teo-photo.jpg" alt="TEO" style="width: 55px; height: 55px; border-radius: 6px; border: 1.5px solid var(--primary); object-fit: cover;" onerror="this.style.display='none'">
+                                    <img src="DEO-photo.jpg" alt="DEO" style="width: 55px; height: 55px; border-radius: 6px; border: 1.5px solid var(--primary); object-fit: cover;" onerror="this.style.display='none'">
                                     <div>
-                                        <div style="font-size: 0.95rem; font-weight: 800; color: var(--primary-dark); margin: 0; line-height: 1.2;">TEO Mr. Niaz Ahmed Khoso</div>
-                                        <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); margin: 1px 0 0 0;">Taluka Thul</div>
+                                        <div style="font-size: 0.95rem; font-weight: 800; color: var(--primary-dark); margin: 0; line-height: 1.2;">DEO Mr. Muhammad Ismail Buriro</div>
+                                        <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); margin: 1px 0 0 0;">District Jacobabad</div>
                                         <div style="font-size: 0.7rem; color: var(--text-dark); margin: 1px 0; font-weight: 500; line-height: 1.1;">Sindh Government Salary Calculator</div>
                                     </div>
                                 </div>
@@ -1455,9 +1455,9 @@
     <footer class="soes-footer">
         <div class="footer-content">
             <div class="footer-text">
-                <span class="dev-desc">Presented by <strong style="color: #34D399;">TEO Mr. Niaz Ahmed Khoso, Taluka Thul</strong></span>
+                <span class="dev-desc">Presented by <strong style="color: #34D399;">DEO Mr. Muhammad Ismail Buriro, District Jacobabad</strong></span>
                 <span class="separator">|</span>
-                <span class="dev-desc">Developed by <a href="#" class="dev-name">Sajjad Ahmed</a></span>
+                <span class="dev-desc">Developed by <a href="#" class="dev-name">Sajjad Ismail</a></span>
                 <span class="separator">|</span>
                 <span class="dev-desc">JEST</span>
                 <span class="separator">|</span>
