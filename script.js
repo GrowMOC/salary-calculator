@@ -38,29 +38,7 @@ function calculateSalary(){
 let bps=document.getElementById("bps").value;
 
 let current=parseInt(
-document.getElementById("basicPay").value
-);
-
-if(!current){
-alert("Enter Basic Pay");
-return;
-}
-
-let scale=payScales[bps];
-
-let stage=Math.round(
-(current-scale.min22)
-/scale.inc22
-);
-
-let newPay=
-scale.min26+
-(stage*scale.inc26);
-
-let difference=
-newPay-current;
-
-`
+document.getElementById("result").innerHTML = `
 <div class="result-box">
 
 <h3>Salary Calculation Result</h3>
@@ -96,18 +74,3 @@ newPay-current;
 
 </div>
 `;
-
-<h3>Calculation Result</h3>
-
-<p><b>Current Basic Pay:</b> Rs. ${current.toLocaleString()}</p>
-
-<p><b>New Basic Pay (2026):</b> Rs. ${newPay.toLocaleString()}</p>
-
-<p><b>Difference:</b> Rs. ${difference.toLocaleString()}</p>
-
-<p><b>Annual Increment 2026:</b> Rs. ${scale.inc26.toLocaleString()}</p>
-
-<p><b>Maximum Pay Scale:</b> Rs. ${scale.max26.toLocaleString()}</p>
-
-`;
-}
