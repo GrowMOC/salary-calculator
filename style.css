@@ -1,46 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salary Increment Calculator 2026</title>
+body{
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+background:#f3f5f7;
+}
 
-<link rel="stylesheet" href="style.css">
-</head>
+.container{
+max-width:900px;
+margin:20px auto;
+padding:15px;
+}
 
-<body>
+.card{
+background:#fff;
+border-radius:15px;
+padding:25px;
+box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
 
-<div class="container">
+.header{
+text-align:center;
+margin-bottom:20px;
+}
 
-<div class="card">
+.profile{
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:50%;
+border:4px solid #0d6efd;
+}
 
-<img src="buriro.jpg" class="profile">
+h2{
+margin:10px 0 5px;
+color:#0d6efd;
+}
 
-<h2>Mr. Muhammad Ismail Buriro</h2>
+h3{
+margin:0;
+font-weight:normal;
+color:#666;
+}
 
-<h3>District Education Officer, Jacobabad</h3>
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
 
-<hr>
+select,input{
+width:100%;
+padding:12px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
 
-<label>Select BPS</label>
+button{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#0d6efd;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
 
-<select id="bps"></select>
+button:hover{
+background:#084fc7;
+}
 
-<label>Current Basic Pay (2022)</label>
+.result-box{
+margin-top:20px;
+padding:20px;
+background:#f8f9fa;
+border-radius:10px;
+}
 
-<input type="number" id="basicPay" placeholder="Enter Current Basic Pay">
+.result-box table{
+width:100%;
+border-collapse:collapse;
+}
 
-<button onclick="calculateSalary()">
-Calculate
-</button>
+.result-box td{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
 
-<div id="result"></div>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+.result-box td:first-child{
+font-weight:bold;
+}
