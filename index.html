@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sindh Education Department - Salary Portal</title>
+<title>Sindh Education Department Salary Portal</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="bg-pattern"></div>
+<div class="bg"></div>
 
 <div class="container">
 
@@ -18,10 +18,8 @@
         <!-- HEADER -->
         <div class="header">
 
-            <div class="logo-row">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg" class="flag">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Sindh_Coat_of_Arms.svg/512px-Sindh_Coat_of_Arms.svg.png" class="govlogo">
-            </div>
+            <!-- LOCAL IMAGE FIX -->
+            <img src="./buriro.jpg" class="profile" alt="DEO Buriro">
 
             <h2>Sindh Education & Literacy Department</h2>
             <div class="subtitle">Government Salary Increment Portal (BPS 01 - 22)</div>
@@ -43,7 +41,7 @@
             </div>
 
             <div class="form-group">
-                <label>Basic Pay (Current)</label>
+                <label>Basic Pay</label>
                 <input type="number" id="basicPay" placeholder="Enter Basic Pay">
             </div>
 
@@ -51,7 +49,6 @@
 
         <button onclick="calculateSalary()">Calculate Salary</button>
 
-        <!-- RESULT -->
         <div id="result"></div>
 
     </div>
