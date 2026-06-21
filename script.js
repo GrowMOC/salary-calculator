@@ -60,7 +60,42 @@ scale.min26+
 let difference=
 newPay-current;
 
-document.getElementById("result").innerHTML=`
+`
+<div class="result-box">
+
+<h3>Salary Calculation Result</h3>
+
+<table>
+
+<tr>
+<td>Current Basic Pay</td>
+<td>Rs. ${current.toLocaleString()}</td>
+</tr>
+
+<tr>
+<td>New Basic Pay (2026)</td>
+<td>Rs. ${newPay.toLocaleString()}</td>
+</tr>
+
+<tr>
+<td>Difference</td>
+<td>Rs. ${difference.toLocaleString()}</td>
+</tr>
+
+<tr>
+<td>Annual Increment</td>
+<td>Rs. ${scale.inc26.toLocaleString()}</td>
+</tr>
+
+<tr>
+<td>Maximum Pay Scale</td>
+<td>Rs. ${scale.max26.toLocaleString()}</td>
+</tr>
+
+</table>
+
+</div>
+`;
 
 <h3>Calculation Result</h3>
 
