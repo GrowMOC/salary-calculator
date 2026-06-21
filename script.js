@@ -1,5 +1,4 @@
 const payScales = {
-
 1:{min22:13550,inc22:430,min26:16280,inc26:520,max26:31880},
 2:{min22:13820,inc22:490,min26:16600,inc26:590,max26:34300},
 3:{min22:14260,inc22:580,min26:17130,inc26:700,max26:38130},
@@ -24,7 +23,7 @@ const payScales = {
 22:{min22:122190,inc22:8710,min26:146770,inc26:10470,max26:293350}
 };
 
-const dropdown=document.getElementById("bps");
+const dropdown = document.getElementById("bps");
 
 for(let i=1;i<=22;i++){
 let option=document.createElement("option");
@@ -35,9 +34,31 @@ dropdown.add(option);
 
 function calculateSalary(){
 
+```
 let bps=document.getElementById("bps").value;
 
 let current=parseInt(
+    document.getElementById("basicPay").value
+);
+
+if(!current){
+    alert("Please enter Basic Pay");
+    return;
+}
+
+let scale=payScales[bps];
+
+let stage=Math.round(
+    (current-scale.min22)/scale.inc22
+);
+
+let newPay=
+    scale.min26+
+    (stage*scale.inc26);
+
+let difference=
+    newPay-current;
+
 document.getElementById("result").innerHTML = `
 <div class="result-box">
 
@@ -74,3 +95,6 @@ document.getElementById("result").innerHTML = `
 
 </div>
 `;
+```
+
+}
