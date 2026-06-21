@@ -44,60 +44,63 @@ if (dropdown) {
 // ---------- CALCULATION FUNCTION ----------
 window.calculateSalary = function () {
 
-    const bps = document.getElementById("bps").value;
-    const current = parseInt(document.getElementById("basicPay").value);
+const resultBox = document.getElementById("result");
 
-    if (!bps) {
-        alert("Please select BPS");
-        return;
-    }
+resultBox.innerHTML = `
+    <div class="result-box">
+        <h3>Salary Calculation Result</h3>
 
-    if (!current || current <= 0) {
-        alert("Please enter valid Basic Pay");
-        return;
-    }
+        <table>
+            <tr>
+                <td>Current Basic Pay</td>
+                <td><span id="curPay">0</span></td>
+            </tr>
+            <tr>
+                <td>New Basic Pay (2026)</td>
+                <td><span id="newPay">0</span></td>
+            </tr>
+            <tr>
+                <td>Difference</td>
+                <td><span id="diffPay">0</span></td>
+            </tr>
+            <tr>
+                <td>Annual Increment</td>
+                <td><span id="incPay">0</span></td>
+            </tr>
+            <tr>
+                <td>Maximum Pay Scale</td>
+                <td><span id="maxPay">0</span></td>
+            </tr>
+        </table>
+    </div>
+`;
 
-    const scale = payScales[bps];
+// ---------- ANIMATION FUNCTION ----------
+function animateValue(id, start, end, duration) {
+    let obj = document.getElementById(id);
+    let startTimestamp = null;
 
-    if (!scale) {
-        alert("Invalid BPS selected");
-        return;
-    }
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
 
-    let stage = Math.round((current - scale.min22) / scale.inc22);
+        let progress = Math.min((timestamp - startTimestamp) / duration, 1);
 
-    if (stage < 0) stage = 0;
+        let value = Math.floor(progress * (end - start) + start);
 
-    const newPay = scale.min26 + (stage * scale.inc26);
-    const difference = newPay - current;
+        obj.innerText = "Rs. " + value.toLocaleString();
 
-    document.getElementById("result").innerHTML = `
-        <div class="result-box">
-            <h3>Salary Calculation Result</h3>
-            <table>
-                <tr>
-                    <td>Current Basic Pay</td>
-                    <td>Rs. ${current.toLocaleString()}</td>
-                </tr>
-                <tr>
-                    <td>New Basic Pay (2026)</td>
-                    <td>Rs. ${newPay.toLocaleString()}</td>
-                </tr>
-                <tr>
-                    <td>Difference</td>
-                    <td>Rs. ${difference.toLocaleString()}</td>
-                </tr>
-                <tr>
-                    <td>Annual Increment</td>
-                    <td>Rs. ${scale.inc26.toLocaleString()}</td>
-                </tr>
-                <tr>
-                    <td>Maximum Pay Scale</td>
-                    <td>Rs. ${scale.max26.toLocaleString()}</td>
-                </tr>
-            </table>
-        </div>
-    `;
-};
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
 
-});
+    window.requestAnimationFrame(step);
+}
+
+// ---------- RUN ANIMATIONS ----------
+animateValue("curPay", 0, current, 700);
+animateValue("newPay", 0, newPay, 900);
+animateValue("diffPay", 0, difference, 800);
+animateValue("incPay", 0, scale.inc26, 700);
+animateValue("maxPay", 0, scale.max26, 900);
+    
